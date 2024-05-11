@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .html {
+    font-family: 'Rubik', sans-serif;
+  }
+  body{
+    background-color: #f3f4f6;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .input {
+    @apply w-full text-sm bg-transparent border-[1.5px];
+  }
+
+  .icon-button {
+    @apply text-xl text-slate-300 curson-pointer hover:text-slate-500;
+  }
+
+  .input-label{
+    @apply text-sm text-slate-500;
+  }
+
+  .particle-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure particles are behind other content */
+  }
+  
+}
