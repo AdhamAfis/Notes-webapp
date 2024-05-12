@@ -29,7 +29,7 @@ This project is a simple notes application that allows users to sign up or log i
 ### Backend Setup
 
 1. Clone the repository: `git clone https://github.com/AdhamAfis/Notes-webapp.git`
-2. Navigate to the backend directory: `cd notes-backend`
+2. Navigate to the backend directory: `cd backend`
 3. Install dependencies: `npm install`
 4. Create a `config.json` file in the root directory of the backend with the following structure:
    ```json
@@ -64,7 +64,7 @@ Replace `<your-access-token-secret>` with your actual secret key.
 
 ### Getting Started with Frontend
 
-1. Navigate to the frontend directory: `cd notes`
+1. Navigate to the frontend directory: `cd frontend`
 2. Install dependencies: `npm install`
 3. Start the development server: `npm run dev`
 
