@@ -1,118 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
-const particleParams = {
-    particles: {
-        number: {
-            value: 80,
-            density: {
-                enable: true,
-                value_area: 800,
-            },
-        },
-        color: {
-            value: "#ffffff",
-        },
-        shape: {
-            type: "circle",
-            stroke: {
-                width: 0,
-                color: "#000000",
-            },
-            polygon: {
-                nb_sides: 5,
-            },
-        },
-        opacity: {
-            value: 0.5,
-            random: true,
-            anim: {
-                enable: true,
-                speed: 1,
-                opacity_min: 0.1,
-                sync: false,
-            },
-        },
-        size: {
-            value: 3,
-            random: true,
-            anim: {
-                enable: true,
-                speed: 2,
-                size_min: 0.1,
-                sync: false,
-            },
-        },
-        line_linked: {
-            enable_auto: true,
-            distance: 100,
-            color: "#ffffff",
-            opacity: 1,
-            width: 1,
-            condensed_mode: {
-                enable: false,
-                rotateX: 600,
-                rotateY: 600,
-            },
-        },
-        move: {
-            enable: true,
-            speed: 1,
-            direction: "none",
-            random: true,
-            straight: false,
-            out_mode: "out",
-            bounce: false,
-            attract: {
-                enable: false,
-                rotateX: 600,
-                rotateY: 1200,
-            },
-        },
-    },
-    interactivity: {
-        detect_on: "canvas",
-        events: {
-            onhover: {
-                enable: true,
-                mode: "repulse",
-            },
-            onclick: {
-                enable: true,
-                mode: "push",
-            },
-            resize: true,
-        },
-        modes: {
-            grab: {
-                distance: 400,
-                line_linked: {
-                    opacity: 1,
-                },
-            },
-            bubble: {
-                distance: 400,
-                size: 40,
-                duration: 2,
-                opacity: 8,
-                speed: 3,
-            },
-            repulse: {
-                distance: 200,
-                duration: 0.4,
-            },
-            push: {
-                particles_nb: 4,
-            },
-            remove: {
-                particles_nb: 2,
-            },
-        },
-    },
-    retina_detect: true,
-};
+
 
 const Login = () => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -125,6 +17,7 @@ const Login = () => {
     };
 
     const handlePasswordChange = (e) => {
+        
         const newPassword = e.target.value;
         setPassword(newPassword);
         if (submitted && newPassword.length < 6) {
@@ -164,6 +57,7 @@ const Login = () => {
 
     return (
         <>
+            
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
