@@ -72,7 +72,7 @@ Replace `<your-access-token-secret>` with your actual secret key.
 
 ### Contributing
 
-Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) to contribute to this project.
+Contributions are welcome!
 
 ### License
 
