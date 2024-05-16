@@ -16,6 +16,10 @@ This project is a simple notes application that allows users to sign up or log i
 
 - **Search Notes**: Users can search for specific notes by title, content, or tags. The search functionality allows users to quickly find relevant information.
 
+## [Demo](https://note-deployment.vercel.app/)
+
+## [Notes App Video Demo](https://drive.google.com/file/d/1rKI12FGKT6jaJBkEecwF8UU34Dqasdy4/view)
+
 ## Backend
 
 ### Technologies Used
@@ -70,7 +74,7 @@ Replace `<your-access-token-secret>` with your actual secret key.
 
 ### Contributing
 
-Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) to contribute to this project.
+Contributions are welcome!
 
 ### License
 
