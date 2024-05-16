@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProfileInfo from "../Cards/ProfileInfo";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import DOMPurify from 'dompurify'; // Import DOMPurify
 
 const Navbar = ({ userInfo, onSearchNote, onClearSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,20 +26,22 @@ const Navbar = ({ userInfo, onSearchNote, onClearSearch }) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
-    setSearchQuery(value);
-    onSearchNote(value);
+    const sanitizedValue = DOMPurify.sanitize(value); // Sanitize the input value
+    setSearchQuery(sanitizedValue);
+    onSearchNote(sanitizedValue);
   };
 
   return (
-    <div className="text-centred bg-white flex items-centered justify-between px-6 py-2 drop-shadow">
-      <h2 className="text-2xl font-bold text-black-400 py-">Notes</h2>
+    <div className="text-center bg-white flex flex-col md:flex-row items-center justify-between px-6 py-2 drop-shadow">
+      <h2 className="text-2xl font-bold text-black-400 py-1">My Notes</h2>
       <SearchBar
         value={searchQuery}
         onChange={handleChange}
         onSearch={handleSearch}
         onClearSearch={handleClearSearch}
+        className="w-80 mt-2"
       />
-      <ProfileInfo userInfo={userInfo} onLogout={onLogout} />
+      <ProfileInfo userInfo={userInfo} onLogout={onLogout} className="mt-2" />
     </div>
   );
 };

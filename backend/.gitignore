@@ -2,31 +2,25 @@
 node_modules/
 
 # Ignore environment-specific files
-.env
-.env.*
+
+
+# Ignore log files
+*.log
 
 # Ignore build artifacts
 build/
 dist/
 
-# Ignore logs
-logs/
-config.json
-
-# Ignore dependency lock files
-package-lock.json
-yarn.lock
-
 # Ignore IDE and editor files
 .vscode/
 .idea/
-*.sublime-project
-*.sublime-workspace
+*.iml
 
-# Ignore test coverage reports
-coverage/
+# Ignore package-lock.json for npm
+package-lock.json
 
-# Ignore temporary files
-*.tmp
-*.bak
-*.swp
+
+# Ignore yarn.lock for Yarn
+yarn.lock
+
+# Ignore any other files or directories you want to exclude

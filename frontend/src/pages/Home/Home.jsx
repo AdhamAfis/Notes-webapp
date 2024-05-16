@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import NoteCard from "../../components/Cards/NoteCard";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineFileText } from "react-icons/ai";
 import AddOrEdit from "./AddOrEdit";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import moment from "moment";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./Home.css"; // Import your custom CSS file
 
 const Home = () => {
   const [openAddOrEditModal, setOpenAddOrEditModal] = useState({
@@ -16,13 +17,13 @@ const Home = () => {
     type: "add",
     note: null,
   });
+  const [selectedNote, setSelectedNote] = useState(null);
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const [allNotes, setAllNotes] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Function to refresh notes
   const getNotes = async (query) => {
     try {
       let endpoint = "/notes";
@@ -38,9 +39,9 @@ const Home = () => {
     }
   };
 
-  // Function to handle modal close after adding or updating note
   const handleCloseModal = () => {
     setOpenAddOrEditModal({ isOpen: false, type: "add", data: null });
+    setSelectedNote(null);
   };
 
   useEffect(() => {
@@ -62,36 +63,31 @@ const Home = () => {
     getNotes();
   }, [navigate]);
 
-  // Add toast notification
   const notify = (type, message) => {
-    if (type === 'success') {
+    if (type === "success") {
       toast.success(message);
-    } else if (type === 'error') {
+    } else if (type === "error") {
       toast.error(message);
     }
   };
-  //funtion to edit a note
-  
 
-  // Function to pin a note
   const pinNote = async (noteId) => {
     try {
       await axiosInstance.put(`/pin-note/${noteId}`);
       getNotes();
     } catch (error) {
-      notify('error', 'Failed to pin note');
+      notify("error", "Failed to pin note");
       console.error("Error pinning note:", error);
     }
   };
 
-  // Function to delete a note
   const deleteNote = async (noteId) => {
     try {
       await axiosInstance.delete(`/delete-note/${noteId}`);
       getNotes();
-      notify('success', 'Note deleted successfully');
+      notify("success", "Note deleted successfully");
     } catch (error) {
-      notify('error', 'Failed to delete note');
+      notify("error", "Failed to delete note");
       console.error("Error deleting note:", error);
     }
   };
@@ -112,46 +108,93 @@ const Home = () => {
         }}
       />
       <div className="container mx-auto">
-        <div className="grid grid-cols-3 gap-4 mt-8">
-          {allNotes.map((note) => (
-            <NoteCard
-              key={note._id}
-              title={note.title}
-              content={note.content}
-              date={moment(note.createdAt).format("MMM Do YY")}
-              tags={note.tags}
-              isPinned={note.isPinned}
-              onEdit={() => setOpenAddOrEditModal({ isOpen: true, type: "edit", data: note })}
-              onDelete={() => deleteNote(note._id)}
-              onPin={() => pinNote(note._id)}
-            />
-          ))}
-        </div>
+        {allNotes.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-[calc(100vh-100px)]">
+            <AiOutlineFileText className="text-6xl text-gray-400" />
+            <p className="text-gray-500 mt-4">
+              No notes available. Create a new note to get started!
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-4 mt-8">
+            {allNotes.map((note) => (
+              <NoteCard
+                key={note._id}
+                title={note.title}
+                content={note.content}
+                date={moment(note.createdAt).format("MMM Do YY")}
+                tags={note.tags}
+                isPinned={note.isPinned}
+                onEdit={() =>
+                  setOpenAddOrEditModal({
+                    isOpen: true,
+                    type: "edit",
+                    data: note,
+                  })
+                }
+                onDelete={() => deleteNote(note._id)}
+                onPin={() => pinNote(note._id)}
+                onClick={() => setSelectedNote(note)}
+              />
+            ))}
+          </div>
+        )}
       </div>
       <button
         className="w-16 h-16 flex items-center justify-center rounded-2xl bg-secondary absolute right-10 bottom-10"
-        onClick={() => setOpenAddOrEditModal({ isOpen: true, type: "add", data: null })}
+        onClick={() =>
+          setOpenAddOrEditModal({ isOpen: true, type: "add", data: null })
+        }
       >
         <AiOutlinePlus className="text-[32px] text-white" />
       </button>
       <Modal
-        isOpen={openAddOrEditModal.isOpen}
+        isOpen={openAddOrEditModal.isOpen || selectedNote !== null}
         onRequestClose={handleCloseModal}
         style={{
           overlay: {
             backgroundColor: "rgba(0,0,0,0.5)",
           },
+          content: {
+            width: "40%",
+            maxWidth: "600px", // Set a max width to prevent content from overflowing
+            maxHeight: "60vh", // Limit the maximum height
+            margin: "auto",
+            overflowY: "auto", // Enable vertical scrolling
+            overflowX: "hidden", // Hide horizontal scrolling
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          },
         }}
         contentLabel=""
-        className="w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5 overflow-scroll-hidden"
       >
-        <AddOrEdit
-          type={openAddOrEditModal.type}
-          noteData={openAddOrEditModal.data}
-          onClose={handleCloseModal}
-          getNotes={getNotes} // Passing getNotes function
-          notify={notify} // Passing notify function for toast notifications
-        />
+        <div className="modal-content"> {/* Wrap the content in a div with a class */}
+          {selectedNote ? (
+            <div>
+              <h2 className="text-3xl font-bold">{selectedNote.title}</h2>
+              <p className="text-lg">{selectedNote.content}</p>
+              <div className="flex gap-2 mt-4 flex-wrap">
+                {selectedNote.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-gray-200 text-gray-600 px-2 py-1 rounded"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <AddOrEdit
+              type={openAddOrEditModal.type}
+              noteData={openAddOrEditModal.data}
+              onClose={handleCloseModal}
+              getNotes={getNotes}
+              notify={notify}
+            />
+          )}
+        </div>
       </Modal>
       <ToastContainer />
     </>

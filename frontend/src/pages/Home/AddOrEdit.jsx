@@ -2,20 +2,24 @@ import React, { useState } from "react";
 import TagInput from "../../components/Input/TagInput";
 import { AiOutlineClose } from "react-icons/ai";
 import axiosInstance from "../../utils/axiosInstance";
+import DOMPurify from "dompurify";
 
 const AddOrEdit = ({ type, noteData, getNotes, onClose, notify }) => {
+  // remaining code...
   const [title, setTitle] = useState(noteData?.title || "");
   const [content, setContent] = useState(noteData?.content || "");
   const [tags, setTags] = useState(noteData?.tags || []);
   const [error, setError] = useState(null);
   const [isAddingOrUpdate, setIsAddingOrUpdate] = useState(false);
 
+  const sanitizeInput = (input) => DOMPurify.sanitize(input);
+
   const addNote = async () => {
     try {
       setIsAddingOrUpdate(true);
       const response = await axiosInstance.post("/add-note", {
-        title,
-        content,
+        title: sanitizeInput(title),
+        content: sanitizeInput(content),
         tags,
       });
       if (response.status === 201) {
@@ -35,8 +39,8 @@ const AddOrEdit = ({ type, noteData, getNotes, onClose, notify }) => {
     try {
       setIsAddingOrUpdate(true);
       const response = await axiosInstance.put(`/edit-note/${noteData._id}`, {
-        title,
-        content,
+        title: sanitizeInput(title),
+        content: sanitizeInput(content),
         tags,
       });
       if (response.status === 200) {

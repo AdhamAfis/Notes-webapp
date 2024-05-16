@@ -100,9 +100,12 @@ app.post("/login", async (req, res) => {
   }
 
   try {
-    // Find user by username or email
+    // Find user by username or email (case insensitive)
     const user = await User.findOne({
-      $or: [{ username: identifier }, { email: identifier }],
+      $or: [
+        { username: { $regex: new RegExp(`^${identifier}$`, "i") } },
+        { email: { $regex: new RegExp(`^${identifier}$`, "i") } },
+      ],
     });
     if (!user) {
       return res.status(404).json({ message: "User not found" });

@@ -1,18 +1,24 @@
+.note-card {
+}
+
+.note-card p {
+  overflow-wrap: break-word;
+}
+
 .note-card-enter {
-    opacity: 0;
-  }
-  
-  .note-card-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in-out;
-  }
-  
-  .note-card-exit {
-    opacity: 1;
-  }
-  
-  .note-card-exit-active {
-    opacity: 0;
-    transition: opacity 500ms ease-in-out;
-  }
-  
+  opacity: 0;
+}
+
+.note-card-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+.note-card-exit {
+  opacity: 1;
+}
+
+.note-card-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
