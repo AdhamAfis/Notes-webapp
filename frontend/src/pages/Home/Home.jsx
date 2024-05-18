@@ -94,6 +94,7 @@ const Home = () => {
 
   return (
     <>
+    <section className=" text-gray-600 h-screen body-font bg-primary">
       <Navbar
         userInfo={userInfo}
         onSearchNote={(query) => {
@@ -141,7 +142,7 @@ const Home = () => {
         )}
       </div>
       <button
-        className="w-16 h-16 flex items-center justify-center rounded-2xl bg-secondary absolute right-10 bottom-10"
+        className="w-16 h-16 flex items-center justify-center rounded-2xl bg-secondary hover:bg-indigo-500 absolute right-10 bottom-10"
         onClick={() =>
           setOpenAddOrEditModal({ isOpen: true, type: "add", data: null })
         }
@@ -157,11 +158,11 @@ const Home = () => {
           },
           content: {
             width: "40%",
-            maxWidth: "600px", // Set a max width to prevent content from overflowing
-            maxHeight: "60vh", // Limit the maximum height
+            maxWidth: "600px",
+            maxHeight: "60vh",
             margin: "auto",
-            overflowY: "auto", // Enable vertical scrolling
-            overflowX: "hidden", // Hide horizontal scrolling
+            overflowY: "auto",
+            overflowX: "hidden",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -169,7 +170,7 @@ const Home = () => {
         }}
         contentLabel=""
       >
-        <div className="modal-content"> {/* Wrap the content in a div with a class */}
+        <div className="modal-content">
           {selectedNote ? (
             <div>
               <h2 className="text-3xl font-bold">{selectedNote.title}</h2>
@@ -196,7 +197,10 @@ const Home = () => {
           )}
         </div>
       </Modal>
-      <ToastContainer />
+      <ToastContainer className="
+        mt-10
+      " />
+    </section>
     </>
   );
 };

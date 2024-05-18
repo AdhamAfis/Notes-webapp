@@ -5,7 +5,6 @@ import axiosInstance from "../../utils/axiosInstance";
 import DOMPurify from "dompurify";
 
 const AddOrEdit = ({ type, noteData, getNotes, onClose, notify }) => {
-  // remaining code...
   const [title, setTitle] = useState(noteData?.title || "");
   const [content, setContent] = useState(noteData?.content || "");
   const [tags, setTags] = useState(noteData?.tags || []);
@@ -106,7 +105,7 @@ const AddOrEdit = ({ type, noteData, getNotes, onClose, notify }) => {
      
       {error && <p className="text-red-500 mt-2">{error}</p>}
       <button
-        className={`bg-secondary text-white text-2xl rounded px-5 py-3 w-full font-semibold focus:outline-none font-right mt-4 ${isAddingOrUpdate ? 'opacity-50 cursor-not-allowed' : 'hover:bg-secondary-dark'}`}
+        className={`bg-secondary hover:bg-indigo-500 text-white text-2xl rounded px-5 py-3 w-full font-semibold focus:outline-none font-right mt-4 ${isAddingOrUpdate ? 'opacity-50 cursor-not-allowed' : 'hover:bg-secondary-dark'}`}
         onClick={handleAddOrUpdate}
         disabled={isAddingOrUpdate}
       >

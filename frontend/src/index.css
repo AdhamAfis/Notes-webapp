@@ -1,39 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  .html {
-    font-family: 'Rubik', sans-serif;
+  :root {
+    --background: 0 0% 100%; /* white */
+    --foreground: 222.2 84% 4.9%; /* dark color */
+
+    --card: 0 0% 100%; /* white */
+    --card-foreground: 222.2 84% 4.9%; /* dark color */
+
+    --popover: 0 0% 100%; /* white */
+    --popover-foreground: 222.2 84% 4.9%; /* dark color */
+
+    --primary: 40 10% 95%; /* offwhite */
+    --primary-foreground: 210 40% 20%; /* dark grey */
+
+    --secondary: 230.85 55.36% 52.84%; /* light purple */
+    --secondary-foreground: 222.2 47.4% 11.2%; /* dark color */
+
+    --muted: 210 40% 96.1%; /* light grey */
+    --muted-foreground: 215.4 16.3% 46.9%; /* medium grey */
+
+    --accent: 210 40% 96.1%; /* light grey */
+    --accent-foreground: 222.2 47.4% 11.2%; /* dark color */
+
+    --destructive: 0 84.2% 60.2%; /* red */
+    --destructive-foreground: 210 40% 98%; /* white */
+
+    --border: 214.3 31.8% 91.4%; /* light grey */
+    --input: 214.3 31.8% 91.4%; /* light grey */
+    --ring: 222.2 84% 4.9%; /* dark color */
+
+    --radius: 0.5rem; /* border radius */
+
+    --button-bg: 265 80% 60%; /* purple */
+    --button-text: 210 40% 98%; /* white */
   }
-  body{
-    background-color: #f3f4f6;
-    overflow-x: hidden;
+
+  .dark {
+    --background: 210 4% 9.8%;   /* dark shade */
+    --foreground: 210 40% 98%; /* white */
+
+    --card: 210 3% 15% ; /* dark shade */
+    --card-foreground: 210 40% 98%; /* white */
+
+    --popover: 222.2 47.4% 11.2%; /* dark shade */
+    --popover-foreground: 210 40% 98%; /* white */
+
+    --primary: 217.2 32.6% 17.5%; /* dark grey */
+    --primary-foreground: 210 40% 98%; /* white */
+
+    --secondary: 230.85 55.36% 52.84%; /* light purple */
+    --secondary-foreground: 210 40% 98%; /* white */
+
+    --muted: 217.2 32.6% 17.5%; /* dark grey */
+    --muted-foreground: 215 20.2% 65.1%; /* medium grey */
+
+    --accent: 217.2 32.6% 17.5%; /* dark grey */
+    --accent-foreground: 210 40% 98%; /* white */
+
+    --destructive: 0 62.8% 30.6%; /* dark red */
+    --destructive-foreground: 210 40% 98%; /* white */
+
+    --border: 217.2 32.6% 17.5%; /* dark grey */
+    --input: 217.2 32.6% 17.5%; /* dark grey */
+    --ring: 212.7 26.8% 83.9%; /* lighter grey */
+
+    --button-bg: 265 80% 60%; /* purple */
+    --button-text: 210 40% 98%; /* white */
   }
 }
 
-@layer components {
-  .input {
-    @apply w-full text-sm bg-transparent border-[1.5px];
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 
-  .icon-button {
-    @apply text-xl text-slate-300 curson-pointer hover:text-slate-500;
-  }
-
-  .input-label{
-    @apply text-sm text-slate-500;
-  }
-
-  .particle-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensure particles are behind other content */
-  }
-  
 }

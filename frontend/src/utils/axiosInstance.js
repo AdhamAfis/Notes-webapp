@@ -1,7 +1,9 @@
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 const axiosInstance = axios.create({
-  baseURL: "https://backend-gamma-topaz-49.vercel.app/",
+  baseURL: process.env.API_BASE_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -10,7 +12,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Check if localStorage is accessible
     if (typeof localStorage !== "undefined") {
       const token = localStorage.getItem("token");
       if (token) {
